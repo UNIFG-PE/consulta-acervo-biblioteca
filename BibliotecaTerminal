@@ -53,3 +53,60 @@ public class BibliotecaTerminal {
         biblioteca.adicionarLivro(new Livro("Grande Sertão: Veredas", "Guimarães Rosa", "Romance"));
         biblioteca.adicionarLivro(new Livro("A Hora da Estrela", "Clarice Lispector", "Drama"));
     }
+
+private static void buscar(String tipo) {
+        System.out.print("Digite o " + tipo + " para buscar: ");
+        String termo = scanner.nextLine().trim();
+
+        if (termo.isEmpty()) {
+            System.out.println("O termo de busca não pode ser vazio.");
+            return;
+        }
+
+        List<Livro> encontrados;
+
+        switch (tipo) {
+            case "título" -> encontrados = biblioteca.buscarPorTitulo(termo);
+            case "autor" -> encontrados = biblioteca.buscarPorAutor(termo);
+            case "gênero" -> encontrados = biblioteca.buscarPorGenero(termo);
+            default -> encontrados = List.of();
+        }
+
+        if (encontrados.isEmpty()) {
+            System.out.println("Nenhum livro encontrado com o " + tipo + " '" + termo + "'.");
+        } else {
+            System.out.println("\nLivros encontrados:");
+            for (Livro livro : encontrados) {
+                System.out.println(livro);
+            }
+        }
+    }
+
+    private static void listarTodos() {
+        List<Livro> todos = biblioteca.listarTodos();
+        if (todos.isEmpty()) {
+            System.out.println("Não há livros disponíveis na biblioteca.");
+        } else {
+            System.out.println("\nTodos os livros disponíveis:");
+            for (Livro livro : todos) {
+                System.out.println(livro);
+            }
+        }
+    }
+
+    private static void adicionarLivro() {
+        System.out.print("Título: ");
+        String titulo = scanner.nextLine().trim();
+        System.out.print("Autor: ");
+        String autor = scanner.nextLine().trim();
+        System.out.print("Gênero: ");
+        String genero = scanner.nextLine().trim();
+
+        if (titulo.isEmpty() || autor.isEmpty() || genero.isEmpty()) {
+            System.out.println("Erro: Todos os campos devem ser preenchidos para adicionar um livro.");
+        } else {
+            biblioteca.adicionarLivro(new Livro(titulo, autor, genero));
+            System.out.println("Livro adicionado com sucesso!");
+        }
+    }
+}
