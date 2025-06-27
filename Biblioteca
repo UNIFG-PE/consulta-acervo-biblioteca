@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Biblioteca {
+    private List<Livro> livros;
+
+    public Biblioteca() {
+        livros = new ArrayList<>();
+    }
+
+    public void adicionarLivro(Livro livro) {
+        livros.add(livro);
+    }
+
+    public List<Livro> buscarPorTitulo(String titulo) {
+        List<Livro> encontrados = new ArrayList<>();
+        for (Livro l : livros) {
+            if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
+                encontrados.add(l);
+            }
+        }
+        return encontrados;
+    }
+
+    public List<Livro> buscarPorAutor(String autor) {
+        List<Livro> encontrados = new ArrayList<>();
+        for (Livro l : livros) {
+            if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
+                encontrados.add(l);
+            }
+        }
+        return encontrados;
+    }
+
+    public List<Livro> buscarPorGenero(String genero) {
+        List<Livro> encontrados = new ArrayList<>();
+        for (Livro l : livros) {
+            if (l.getGenero().toLowerCase().contains(genero.toLowerCase())) {
+                encontrados.add(l);
+            }
+        }
+        return encontrados;
+    }
+
+    public List<Livro> listarTodos() {
+        return livros;
+    }
